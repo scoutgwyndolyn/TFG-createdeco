@@ -3,17 +3,27 @@ ServerEvents.recipes(event => {
     // andesite alloy to ???
     // andesite alloy sheet to ???
 
-        'create:zinc_ingot': 'gtceu:zinc_ingot',
-        'createdeco:zinc_sheet': 'gtceu:zinc_plate',
-        'create:brass_ingot': 'gtceu:brass_ingot',
-        'create:iron_sheet': 'gtceu:iron_plate',
-        'createdeco:industrial_iron_ingot': 'gtceu:steel_ingot',
-        'createdeco:industrial_iron_sheet': 'gtceu:steel_plate',
-        'create:brass_sheet' : 'gtceu:brass_plate',
-        'minecraft:torch' : 'tfc:torch',
-        'create:brass_nugget' : 'gtceu:brass_nugget',
         'create:andesite_alloy' : 'gtceu:tin_alloy_ingot',
         'createdeco:andesite_sheet' : 'gtceu:tin_alloy_plate',
+
+        'create:brass_ingot': 'gtceu:brass_ingot',
+        'create:brass_sheet' : 'gtceu:brass_plate',
+        'create:brass_nugget' : 'gtceu:brass_nugget',
+
+        'create:copper_nugget' : 'gtceu:copper_nugget',
+
+        'create:zinc_ingot': 'gtceu:zinc_ingot',
+        'createdeco:zinc_sheet': 'gtceu:zinc_plate',
+        'create:zinc_nugget': 'gtceu:zinc_nugget',
+
+        'create:iron_sheet': 'gtceu:iron_plate',
+
+        'createdeco:industrial_iron_ingot': 'gtceu:steel_ingot',
+        'createdeco:industrial_iron_sheet': 'gtceu:steel_plate',
+        'createdeco:industrial_iron_nugget' : 'gtceu:steel_nugget',
+
+        'minecraft:torch' : 'tfc:torch',
+        'minecraft:string' : '#forge:string',
     };
 
     event.shaped("tfc:metal/bars/wrought_iron", [
@@ -29,10 +39,12 @@ ServerEvents.recipes(event => {
         event.replaceInput({mod:"createdeco"}, missingItem, replacementItem);
       });
 
-    event.remove({output: 'createdeco:zinc_sheet'})
+    event.remove({output: 'createdeco:andesite_sheet'})
     event.remove({output: 'createdeco:industrial_iron_sheet'})
+    event.remove({output: 'createdeco:zinc_sheet'})
     event.remove({output: 'createdeco:industrial_iron_nugget'})
-    event.remove({output: 'createdeco:industrial_iron_ingot'})
+    event.remove({output: 'create:copper_nugget'})
+    event.remove({output: 'create:zinc_nugget'})
 
     // lamp recipe fixes
     const lampColors = ['blue', 'green', 'red', 'yellow'];
@@ -79,7 +91,10 @@ ServerEvents.recipes(event => {
             ingredients.N = 'gtceu:tin_alloy_nugget'; 
             ingredients.P = 'gtceu:tin_alloy_plate';
         }
-
+        if (lampType === 'industrial_iron') {
+            ingredients.N = 'gtceu:steel_nugget';
+            ingredients.P = 'gtceu:steel_plate';
+        }
         console.log(`Ingredients for ${output}:`, ingredients);
     
         // Create the shaped recipe
